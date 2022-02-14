@@ -5,6 +5,8 @@
 * Last Edited by: NA
 * Last edited: 2/9/2022
 * 
+* 
+* Description:
 
 ****/
 using System.Collections;
@@ -65,6 +67,9 @@ public class Slingshot : MonoBehaviour
             aimingMode = false;
             projectileRB.isKinematic = false;
             projectileRB.velocity = -mouseDelta * velocityMultiplier;
+
+            FollowCam.POI = projectile;//set the poi for the camera
+
             projectile = null; //forget last instance
         }
 
