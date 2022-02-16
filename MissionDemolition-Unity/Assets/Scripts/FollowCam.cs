@@ -43,9 +43,32 @@ public class FollowCam : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (POI == null) return;
+        //if (POI == null) return;
 
-        Vector3 destination = POI.transform.position;
+        //Vector3 destination = POI.transform.position;
+
+        Vector3 destination;
+        
+        if (POI == null) //if no POI
+        {
+            destination = Vector3.zero; //destination is zero
+        }
+        else
+        {
+            destination = POI.transform.position;
+            if (POI.tag == "Projectile")
+            {
+                if (POI.GetComponent<Rigidbody>().IsSleeping())
+                {
+                    POI = null; //null the POI if the rigidbody is asleep
+                    return; //in the next update
+                }
+
+            }
+
+        }
+
+
 
         destination.x = Mathf.Max(minXY.x, destination.x); 
         destination.y = Mathf.Max(minXY.y, destination.y);
