@@ -42,10 +42,15 @@ public class ProjectileLine : MonoBehaviour
             if (_poi != null)
             {
                 line.enabled = false;
-                points = new List<Vector3>;
+                points = new List<Vector3>();
                 AddPoints();
             }   
         }
+    }
+
+    void AddPoints()
+    {
+
     }
 
 
