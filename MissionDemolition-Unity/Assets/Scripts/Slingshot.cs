@@ -15,6 +15,8 @@ using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
+    static private Slingshot S;
+
     /** Variables **/
     [Header("Set in Inspector")]
     public GameObject prefabProjectile;
@@ -29,8 +31,23 @@ public class Slingshot : MonoBehaviour
     public Rigidbody projectileRB; //RigidBody of projectile
 
 
+    static public Vector3 LAUNCH_POS
+    {
+        get
+        {
+            if (S == null) return Vector3.zero;
+
+            return S.launchPos;
+
+        }
+
+    }
+
+
     private void Awake()
     {
+        S = this;
+
         Transform launchPointTrans = transform.Find("LaunchPoint"); //find child transform
 
         launchPoint = launchPointTrans.gameObject; //the game object of of the child object
@@ -71,6 +88,9 @@ public class Slingshot : MonoBehaviour
             FollowCam.POI = projectile;//set the poi for the camera
 
             projectile = null; //forget last instance
+
+            MissionDemolition.ShotFired();
+            ProjectileLine.S.poi = projectile;
         }
 
     }
